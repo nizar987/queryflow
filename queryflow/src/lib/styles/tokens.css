@@ -1,0 +1,80 @@
+/* Design tokens — DESIGN.md §5 (typography), §6 (semantic colors).
+   Flat surfaces, thin borders, two font sizes for diagram content. */
+:root {
+  /* Surfaces (dark neutral base — DESIGN.md §9 leaves theme open; neutral dark chosen) */
+  --surface-0: #0f1115; /* canvas */
+  --surface-1: #161a21; /* navbar, input wrapper */
+  --surface-2: #1c222b; /* panels, editor box, active items */
+  --surface-3: #232b36; /* hover */
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Text */
+  --text-primary: #e6e9ef;
+  --text-secondary: #a4adbd;
+  --text-muted: #6b7488;
+
+  /* Accent */
+  --accent: #5b8def;
+  --accent-soft: rgba(91, 141, 239, 0.15);
+
+  /* Semantic node-category colors (DESIGN.md §6) */
+  --c-gray: #8b93a6; /* structural neutral: FROM, ORDER BY */
+  --c-blue: #5b8def; /* JOIN */
+  --c-coral: #e8806b; /* WHERE / filter */
+  --c-purple: #a884e0; /* GROUP BY / aggregation */
+  --c-teal: #46b8a8; /* SELECT / output */
+
+  /* Severity (DESIGN.md §6) */
+  --sev-critical: #e5564b;
+  --sev-warning: #d9a441;
+  --sev-info: #8b93a6;
+  --success: #5cb87a; /* fix suggestion text */
+
+  /* Typography scale */
+  --fs-label: 14px;
+  --fs-body: 13px;
+  --fs-sub: 12px;
+  --fs-code: 12px;
+  --fs-meta: 11px;
+
+  --mono: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --radius: 6px;
+  --radius-sm: 4px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
