@@ -1,0 +1,25 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Seq Scan",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Relation Name": "order_items",
+      "Alias": "order_items",
+      "Startup Cost": 0.00,
+      "Total Cost": 2978.00,
+      "Plan Rows": 710,
+      "Plan Width": 26,
+      "Actual Startup Time": 50.545,
+      "Actual Total Time": 50.546,
+      "Actual Rows": 0,
+      "Actual Loops": 1,
+      "Filter": "(sku = 'SKU-999999'::text)",
+      "Rows Removed by Filter": 150000
+    },
+    "Planning Time": 0.196,
+    "Triggers": [
+    ],
+    "Execution Time": 50.567
+  }
+]

@@ -1,0 +1,201 @@
+/* Design tokens — DESIGN.md §5 (typography), §6 (semantic colors).
+   Flat surfaces, thin borders, two font sizes for diagram content.
+   Dark is the default; `data-theme="light"` on <html> flips the neutral ramp.
+   Semantic hues are re-tuned per theme so contrast holds on light surfaces. */
+:root {
+  /* Surfaces (dark neutral base — DESIGN.md §9 leaves theme open; neutral dark chosen) */
+  --surface-0: #0f1115; /* canvas */
+  --surface-1: #161a21; /* navbar, input wrapper */
+  --surface-2: #1c222b; /* panels, editor box, active items */
+  --surface-3: #232b36; /* hover */
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Text */
+  --text-primary: #e6e9ef;
+  --text-secondary: #a4adbd;
+  --text-muted: #6b7488;
+
+  /* Accent */
+  --accent: #5b8def;
+  --accent-ink: #ffffff; /* text on a filled accent surface */
+  --accent-soft: rgba(91, 141, 239, 0.15);
+  --accent-line: rgba(91, 141, 239, 0.35);
+
+  /* Semantic node-category colors (DESIGN.md §6) */
+  --c-gray: #8b93a6; /* structural neutral: FROM, ORDER BY */
+  --c-blue: #5b8def; /* JOIN */
+  --c-coral: #e8806b; /* WHERE / filter */
+  --c-purple: #a884e0; /* GROUP BY / aggregation */
+  --c-teal: #46b8a8; /* SELECT / output */
+
+  /* Severity (DESIGN.md §6) */
+  --sev-critical: #e5564b;
+  --sev-warning: #d9a441;
+  --sev-info: #8b93a6;
+  --success: #5cb87a; /* fix suggestion text */
+
+  /* Tinted washes derived from the semantic hues (kept as tokens so the light
+     theme can swap opacity without every component re-deriving rgba()). */
+  --wash-critical: rgba(229, 86, 75, 0.09);
+  --wash-critical-line: rgba(229, 86, 75, 0.35);
+  --wash-warning: rgba(217, 164, 65, 0.08);
+  --wash-warning-line: rgba(217, 164, 65, 0.32);
+  --wash-coral: rgba(232, 128, 107, 0.09);
+  --wash-coral-line: rgba(232, 128, 107, 0.32);
+  --wash-success: rgba(92, 184, 122, 0.09);
+
+  /* Syntax highlight */
+  --tk-string: #9bcb7a;
+
+  /* Diagram canvas grid */
+  --grid-dot: rgba(255, 255, 255, 0.05);
+  --node-fill: var(--surface-2);
+  --block-fill: rgba(255, 255, 255, 0.015);
+
+  /* Typography scale */
+  --fs-label: 14px;
+  --fs-body: 13px;
+  --fs-sub: 12px;
+  --fs-code: 12px;
+  --fs-meta: 11px;
+
+  --mono: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --radius: 6px;
+  --radius-sm: 4px;
+
+  --shadow-pop: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --scrim: rgba(0, 0, 0, 0.55);
+
+  /* Motion — every transition references these so reduced-motion can zero them. */
+  --dur-fast: 0.12s;
+  --dur-med: 0.2s;
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --surface-0: #f6f7f9;
+  --surface-1: #ffffff;
+  --surface-2: #f0f2f6;
+  --surface-3: #e4e8ef;
+
+  --border: rgba(15, 20, 30, 0.1);
+  --border-strong: rgba(15, 20, 30, 0.2);
+
+  --text-primary: #171b23;
+  --text-secondary: #4d5769;
+  --text-muted: #7c8698;
+
+  --accent: #2f6fe0;
+  --accent-soft: rgba(47, 111, 224, 0.12);
+  --accent-line: rgba(47, 111, 224, 0.4);
+
+  --c-gray: #6c7488;
+  --c-blue: #2f6fe0;
+  --c-coral: #cf5a3d;
+  --c-purple: #7f4fc4;
+  --c-teal: #1e8578;
+
+  --sev-critical: #c9352a;
+  --sev-warning: #a1741b;
+  --sev-info: #6c7488;
+  --success: #24804a;
+
+  --wash-critical: rgba(201, 53, 42, 0.07);
+  --wash-critical-line: rgba(201, 53, 42, 0.28);
+  --wash-warning: rgba(161, 116, 27, 0.08);
+  --wash-warning-line: rgba(161, 116, 27, 0.28);
+  --wash-coral: rgba(207, 90, 61, 0.07);
+  --wash-coral-line: rgba(207, 90, 61, 0.28);
+  --wash-success: rgba(36, 128, 74, 0.08);
+
+  --tk-string: #2f7d32;
+
+  --grid-dot: rgba(15, 20, 30, 0.07);
+  --node-fill: #ffffff;
+  --block-fill: rgba(15, 20, 30, 0.02);
+
+  --shadow-pop: 0 8px 24px rgba(15, 20, 30, 0.12);
+  --shadow-modal: 0 20px 60px rgba(15, 20, 30, 0.2);
+  --scrim: rgba(15, 20, 30, 0.35);
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Theme swap shouldn't strobe — fade the big surfaces only. */
+html.theme-anim,
+html.theme-anim body {
+  transition: background-color var(--dur-med) var(--ease), color var(--dur-med) var(--ease);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* One focus treatment for the whole app. Mouse users never see it; keyboard
+   users always do — previously there was no visible ring anywhere. */
+:where(a, button, select, textarea, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+svg :where(g, rect, text)[tabindex]:focus-visible {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0.01ms;
+    --dur-med: 0.01ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

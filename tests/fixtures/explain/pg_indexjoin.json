@@ -1,0 +1,83 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Nested Loop",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Join Type": "Inner",
+      "Startup Cost": 5.52,
+      "Total Cost": 283.41,
+      "Plan Rows": 123,
+      "Plan Width": 20,
+      "Actual Startup Time": 1.400,
+      "Actual Total Time": 18.895,
+      "Actual Rows": 122,
+      "Actual Loops": 1,
+      "Inner Unique": false,
+      "Plans": [
+        {
+          "Node Type": "Index Scan",
+          "Parent Relationship": "Outer",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Scan Direction": "Forward",
+          "Index Name": "customers_pkey",
+          "Relation Name": "customers",
+          "Alias": "c",
+          "Startup Cost": 0.27,
+          "Total Cost": 8.29,
+          "Plan Rows": 1,
+          "Plan Width": 20,
+          "Actual Startup Time": 0.551,
+          "Actual Total Time": 0.552,
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Index Cond": "(id = 42)",
+          "Rows Removed by Index Recheck": 0
+        },
+        {
+          "Node Type": "Bitmap Heap Scan",
+          "Parent Relationship": "Inner",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Relation Name": "orders",
+          "Alias": "o",
+          "Startup Cost": 5.24,
+          "Total Cost": 273.89,
+          "Plan Rows": 123,
+          "Plan Width": 16,
+          "Actual Startup Time": 0.842,
+          "Actual Total Time": 18.328,
+          "Actual Rows": 122,
+          "Actual Loops": 1,
+          "Recheck Cond": "(customer_id = 42)",
+          "Rows Removed by Index Recheck": 0,
+          "Exact Heap Blocks": 103,
+          "Lossy Heap Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Bitmap Index Scan",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Index Name": "idx_orders_customer",
+              "Startup Cost": 0.00,
+              "Total Cost": 5.21,
+              "Plan Rows": 123,
+              "Plan Width": 0,
+              "Actual Startup Time": 0.411,
+              "Actual Total Time": 0.411,
+              "Actual Rows": 122,
+              "Actual Loops": 1,
+              "Index Cond": "(customer_id = 42)"
+            }
+          ]
+        }
+      ]
+    },
+    "Planning Time": 1.405,
+    "Triggers": [
+    ],
+    "Execution Time": 19.475
+  }
+]
